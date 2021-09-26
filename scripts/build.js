@@ -3,7 +3,6 @@ const rollup = require('rollup');
 
 let builds = require('./config').getAllBuilds();
 
-console.log(builds);
 build(builds);
 
 function build() {
@@ -25,10 +24,8 @@ function buildEntry (config) {
     const output = config.output;
     const { file, banner } = output;
     const isProd = /(min|prod)\.js$/.test(file);
-    return rollup.rollup(config)
-        .then(bundle => bundle.generate(output))
-        .then(({ output: [{ code }] }) => {
-            return write(file, code);
+    return rollup.rollup(config).then(bundle => bundle.generate(output)).then(({ output: [{ code }] }) => {
+        return write(file, code);
     });
 }
 
