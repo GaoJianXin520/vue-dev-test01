@@ -9,9 +9,14 @@
     <script src="../dist/vue.js"></script>
 </head>
 <body>
+    <div id="app"></div>
     <script>
         new Vue({
-            el: 'abc'
+            el: '#app',
+            template: '<div>{{ name }}</div>',
+            data: {
+                name: 'abc'
+            }
         });
     </script>
 </body>
