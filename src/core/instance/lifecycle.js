@@ -7,11 +7,8 @@ export function lifecycleMixin (Vue) {
     }
 }
 
-export function mountComponent() {
+export function mountComponent(vm, el, hydrating) {
     vm.$el = el;
-    vm._render = function() {
-        console.log('vm._render');
-    }
     let updateComponent;
     updateComponent = () => {
         vm._update(vm._render(), hydrating);

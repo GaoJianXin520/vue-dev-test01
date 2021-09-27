@@ -17,18 +17,30 @@
         };
     }
 
+    function renderMixin (Vue) {
+        Vue.prototype._render = function() {
+            const vm = this;
+            const { render } = vm.$options;
+            let vnode;
+            vnode = render.call(vm._renderProxy, vm.$createElement);
+            return vnode;
+        };
+    }
+
     function Vue(options){
         this._init(options);
     }
 
     initMixin(Vue);
+    renderMixin(Vue);
 
-    function mountComponent() {
-
+    function mountComponent(vm, el, hydrating) {
+        vm.$el = el;
+        return vm;
     }
 
     Vue.prototype.$mount = function (el, hydrating) {
-        return mountComponent();
+        return mountComponent(this, el);
     };
 
     function query (el) {
@@ -59,9 +71,8 @@
 
             if (template) {
                 let render = function() {
-                    console.log('template render');
+                    return 'template render';
                 };
-                console.log('name options', options);
                 options.render = render;
             }
         }

@@ -23,9 +23,8 @@ Vue.prototype.$mount = function (el, hydrating) {
 
         if (template) {
             let render = function() {
-                console.log('template render');
+                return 'template render';
             };
-            console.log('name options', options);
             options.render = render;
         }
     }
